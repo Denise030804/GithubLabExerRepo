@@ -1,0 +1,7 @@
+WITH
+BY
+ON
+IN
+AT
+UNDER
+OVER
