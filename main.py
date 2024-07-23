@@ -23,7 +23,6 @@ def main(page: ft.Page):
 
     page.on_route_change = route_change
 
-    # Initialize database
     conn = sqlite3.connect('users.db')
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS users
