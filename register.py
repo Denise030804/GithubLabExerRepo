@@ -40,14 +40,25 @@ def create_register_page(page: ft.Page):
             page.snack_bar = ft.SnackBar(ft.Text("Account has been registered"))
             page.snack_bar.open = True
             page.update()
-            page.go("/login")
+            
+            
+            username.value = ""
+            full_name.value = ""
+            age.value = ""
+            location.value = ""
+            password.value = ""
+            confirm_password.value = ""
+            
+            page.window_to_front()
+            page.update()
+            page.after(2, lambda _: page.go("/login"))
         
         conn.close()
-        page.update()
 
-    def toggle_password_visibility(password_field):
+    def toggle_password_visibility(password_field, icon_button):
         password_field.password = not password_field.password
-        password_field.update()
+        icon_button.icon = ft.icons.VISIBILITY if password_field.password else ft.icons.VISIBILITY_OFF
+        page.update()
 
     username = ft.TextField(label="Username")
     full_name = ft.TextField(label="Full Name")
@@ -58,11 +69,11 @@ def create_register_page(page: ft.Page):
 
     show_password = ft.IconButton(
         icon=ft.icons.VISIBILITY_OFF,
-        on_click=lambda _: toggle_password_visibility(password)
+        on_click=lambda _: toggle_password_visibility(password, show_password)
     )
     show_confirm_password = ft.IconButton(
         icon=ft.icons.VISIBILITY_OFF,
-        on_click=lambda _: toggle_password_visibility(confirm_password)
+        on_click=lambda _: toggle_password_visibility(confirm_password, show_confirm_password)
     )
 
     return ft.View(

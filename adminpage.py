@@ -79,9 +79,10 @@ def create_admin_page(page: ft.Page):
         conn.close()
         page.update()
     
-    def toggle_password_visibility(password_field):
+    def toggle_password_visibility(password_field, icon_button):
         password_field.password = not password_field.password
-        password_field.update()
+        icon_button.icon = ft.icons.VISIBILITY if password_field.password else ft.icons.VISIBILITY_OFF
+        page.update()
     
     users_list = ft.ListView(expand=1, spacing=10, padding=20)
     username = ft.TextField(label="Username")
@@ -93,11 +94,11 @@ def create_admin_page(page: ft.Page):
 
     show_password = ft.IconButton(
         icon=ft.icons.VISIBILITY_OFF,
-        on_click=lambda _: toggle_password_visibility(password)
+        on_click=lambda _: toggle_password_visibility(password, show_password)
     )
     show_confirm_password = ft.IconButton(
         icon=ft.icons.VISIBILITY_OFF,
-        on_click=lambda _: toggle_password_visibility(confirm_password)
+        on_click=lambda _: toggle_password_visibility(confirm_password, show_confirm_password)
     )
 
     update_users_list()

@@ -26,15 +26,28 @@ def create_login_page(page: ft.Page):
             page.snack_bar.open = True
             page.update()
 
+    def toggle_password_visibility(_):
+        password.password = not password.password
+        show_password.icon = ft.icons.VISIBILITY if password.password else ft.icons.VISIBILITY_OFF
+        page.update()
+
     username = ft.TextField(label="Username")
     password = ft.TextField(label="Password", password=True)
+    
+    show_password = ft.IconButton(
+        icon=ft.icons.VISIBILITY_OFF,
+        on_click=toggle_password_visibility
+    )
 
     return ft.View(
         "/login",
         [
             ft.AppBar(title=ft.Text("Login"), bgcolor=ft.colors.SURFACE_VARIANT),
             username,
-            password,
+            ft.Row([
+                ft.Container(password, expand=True),
+                show_password
+            ]),
             ft.ElevatedButton("Login", on_click=login),
             ft.ElevatedButton("Register", on_click=lambda _: page.go("/register")),
         ],
