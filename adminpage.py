@@ -88,7 +88,7 @@ def create_admin_page(page: ft.Page):
     username = ft.TextField(label="Username")
     full_name = ft.TextField(label="Full Name")
     age = ft.TextField(label="Age")
-    location = ft.TextField(label="Location")
+    location = ft.TextField(label="Address")
     password = ft.TextField(label="Password", password=True)
     confirm_password = ft.TextField(label="Confirm Password", password=True)
 

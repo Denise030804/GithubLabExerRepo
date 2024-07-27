@@ -41,17 +41,8 @@ def create_register_page(page: ft.Page):
             page.snack_bar.open = True
             page.update()
             
-            
-            username.value = ""
-            full_name.value = ""
-            age.value = ""
-            location.value = ""
-            password.value = ""
-            confirm_password.value = ""
-            
-            page.window_to_front()
-            page.update()
-            page.after(2, lambda _: page.go("/login"))
+            page.client_storage.set("username", username.value)
+            page.go("/main")
         
         conn.close()
 
@@ -63,7 +54,7 @@ def create_register_page(page: ft.Page):
     username = ft.TextField(label="Username")
     full_name = ft.TextField(label="Full Name")
     age = ft.TextField(label="Age")
-    location = ft.TextField(label="Location")
+    location = ft.TextField(label="Address")
     password = ft.TextField(label="Password", password=True)
     confirm_password = ft.TextField(label="Confirm Password", password=True)
 

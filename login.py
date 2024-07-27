@@ -13,7 +13,8 @@ def create_login_page(page: ft.Page):
         if user:
             stored_password = user[1]
             if bcrypt.checkpw(password.value.encode('utf-8'), stored_password):
-                if user[2]:  # is_admin
+                page.client_storage.set("username", username.value)
+                if user[2]:  
                     page.go("/admin")
                 else:
                     page.go("/main")
